@@ -1,0 +1,46 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title>Ajouter un element</title>
+		<a href="/">Menu</a>
+	</head>
+	
+	<body>
+		<h1 th:if="${ element == null}">Ajouter un element</h1>
+		<h1 th:if="${ element != null}">Modifier un element</h1>
+		
+		<form method="POST" enctype="multipart/form-data">
+			<div>
+				<label>Nom</label>
+				<input type="text" name="statement" required="required" th:value="${ element?.statement }"/>
+			</div>
+			 
+			<div>
+				<label>Url</label>
+				<input type="file" name="file" th:value="${ element?.url }"/>
+				<img  th:if="${ element?.url }" th:src="${ element?.url }">
+			</div>
+			<div>
+				<label>Type</label>
+				<select name="type">
+					<option value="TEXTE" th:selected="${ 'TEXTE' == element?.type?.name() }">Texte</option>
+					<option value="VIDEO" th:selected="${ 'VIDEO' == element?.type?.name() }">Video</option>
+					<option value="IMAGE" th:selected="${ 'IMAGE' == element?.type?.name() }">Image</option>
+				</select>
+			</div>
+			<div >			
+				<label>Text1</label>
+				<input type="text" name="text1" th:value="${ element?.text1 }" />
+			</div>
+			<div>
+				<label>Texte2</label>
+				<input type="text" name="text2" th:value="${ element?.text2 }"/>
+			</div>								
+			<div>
+				<input type='hidden' th:value='${_csrf.token}' th:name='${_csrf.parameterName}'/>
+				<button type="submit">Submit</button>
+			</div>
+		</form>
+	</body>
+</html>

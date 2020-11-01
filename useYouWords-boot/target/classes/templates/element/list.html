@@ -1,0 +1,26 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title>Liste des produits</title>
+		<base href="/" />
+	</head>
+	
+	<body>
+		<h1>Liste des elements</h1>
+		
+		<a href="/">Menu</a>
+		<a href="element/add">AJOUTER</a>
+		
+		<ul>
+			<li th:each="element : ${ elements }">
+				[[ ${ element.statement } ]]
+				
+				
+				[ <a th:href="@{ element/edit(id=${ element.id }) }">Modifier</a> ]
+				[ <a th:href="@{ element/delete/{id}(id=${ element.id }) }">Supprimer</a> ]
+				
+			</li>
+		</ul>
+	</body>
+</html>
